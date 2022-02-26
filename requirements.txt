@@ -1,6 +1,6 @@
 Flask
 requests
 python-dotenv
-flask-login
-Flask-SQLAlchemy
+flask_login
+flask_SQLAlchemy
 black
