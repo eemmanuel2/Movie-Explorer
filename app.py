@@ -2,7 +2,7 @@
 import os
 import flask
 from dotenv import load_dotenv, find_dotenv
-from flask_login import LoginManager, login_user, current_user, logout_user, UserMixin
+from flask_login import LoginManager, login_user, current_user, UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from tmdb import movie_id_search
 import random
