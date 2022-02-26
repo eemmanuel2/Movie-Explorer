@@ -3,4 +3,3 @@ requests
 python-dotenv
 flask_login
 flask_sqlalchemy
-black
