@@ -13,7 +13,7 @@ I'm still planning on solving all my technical issues with further research, I a
 I solved all my technical issues and in my honest opinion I think it looks pretty on the eyes :)! 
 
 
-Heroku URL : https://fathomless-refuge-93674.herokuapp.com/
+Heroku URL : https://mighty-spire-29615.herokuapp.com/
 
 Please Enjoy :) !!
 
