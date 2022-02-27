@@ -38,22 +38,27 @@
     <img src={{piclink+moviepicture}}> </img>
 
     <form method="POST" action="/ratecard">
-        <p><b>PLEASE RATE AND COMMENT HERE 1-10</p></b>
-        <input type="number" name="rating" min="1" max="10">
-        <input type="text" name="comment" />
-        <input type="submit" value="Add a rating" />
+
+        <p style="text-align:center"><b>PLEASE RATE AND COMMENT HERE 1-10</p></b>
+        <p style="text-align:center">Rate:<input type="number" name="rating" min="1" max="10"></p>
+        <p style="text-align:center">Comment:<input type="text" name="comment" /></p>
+        <p style="text-align:center"><input type="submit" value="Add a rating" /></p>
     </form>
-    <p>Movie ID {{movi_id}}</p>
 
 
 
 
     <ol>
-
+        <p style="text-align:center">Users Signed Up:</p>
+        {% for i in range(num_users) %}
+        <p style="text-align:center"><b>{{users[i].username}}</b></p>
+        {% endfor %}
+        <p style="text-align:center"><b>Rates & Comments Below (Please Make sure to specify which movie you rate)</b>
+        </p>
         {% for i in range(num_rates) %}
 
-        <p style="text-align:center"><b>Rating:{{rates[i].rating}}</b></p>
-        <p style="text-align:center"><b>Comment:{{comments[i].comment}}</b></p>
+        <p style="text-align:center">Rating:{{rates[i].rating}}</p>
+        <p style="text-align:center">Comment:{{comments[i].comment}}</p>
         {% endfor %}
 
     </ol>

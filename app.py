@@ -83,7 +83,7 @@ def ratecard():
     a = random.randrange(0, len(movies1) - 1)
     movie_id = movies1[a]
     movie_search = movie_id_search()
-
+    data = flask.request.form
     if flask.request.method == "POST":
 
         #   ratg = flask.request.form.get("rating")
@@ -91,18 +91,21 @@ def ratecard():
         #   db.session.add(cmmnt)
         #   db.session.add(ratg)
         #   db.session.commit()
-        data = flask.request.form
+
         rate = data["rating"]
 
         comnt = data["comment"]
         record = Rating(rating=rate, comment=comnt, m_id=movie_id)
+
         db.session.add(record)
         db.session.commit()
+
+    users = User.query.all()
+    num_users = len(users)
 
     rates = Rating.query.all()
     num_rates = len(rates)
     comments = Rating.query.all()
-    num_comments = len(comments)
     return flask.render_template(
         "ratecard.html",
         moviename=movie_search["moviename"],
@@ -114,8 +117,9 @@ def ratecard():
         movi_id=movie_search["movi_id"],
         rates=rates,
         num_rates=num_rates,
-        num_comments=num_comments,
         comments=comments,
+        users=users,
+        num_users=num_users,
     )
 
 
@@ -149,3 +153,8 @@ app.run(
     host=os.getenv("IP", "0.0.0.0"),
     port=int(os.getenv("PORT", 8080)),
 )
+
+
+#  if  current_user.is_authenticated:
+#  flask.flash("Welcome")
+# return(users=current_user.username)
