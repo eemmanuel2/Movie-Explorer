@@ -1,6 +1,6 @@
 Flask
 requests
 python-dotenv
-flask_login
-flask_sqlalchemy
-psycopg2
+flask-login
+Flask-SQLAlchemy
+psycopg2-binary
