@@ -60,7 +60,7 @@ def login_post():
     user = User.query.filter_by(username=username).first()
     if user:
         login_user(user)
-        return flask.redirect(flask.url_for("main"))
+        return flask.redirect(flask.url_for("index"))
 
     else:
         return flask.jsonify({"status": 401, "reason": "Username or Password Error"})
@@ -85,13 +85,13 @@ def rate():
 
     db.session.add(new_rating)
     db.session.commit()
-    return flask.redirect("main")
+    return flask.redirect("index")
 
 
 @app.route("/")
 def landing():
     if current_user.is_authenticated:
-        return flask.redirect("main")
+        return flask.redirect("index")
     return flask.redirect("login")
 
 
@@ -101,9 +101,9 @@ def logout():
     return flask.redirect("login")
 
 
-@app.route("/main")
+@app.route("/index")
 @login_required
-def main():
+def index():
     movie_id = random.choice(MOVIE_IDS)
 
     # API calls
@@ -113,7 +113,7 @@ def main():
     ratings = Rating.query.filter_by(movie_id=movie_id).all()
 
     return flask.render_template(
-        "main.html",
+        "index.html",
         title=title,
         tagline=tagline,
         genre=genre,
@@ -159,7 +159,7 @@ def delete_rate():
     db.session.commit()
 
     return flask.render_template(
-        "main.html",
+        "index.html",
     )
 
 
