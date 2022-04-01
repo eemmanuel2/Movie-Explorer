@@ -1,6 +1,6 @@
 import random
 import os
-from flask_cors import CORS
+
 import flask
 from flask_login import login_user, current_user, LoginManager, logout_user
 from flask_login.utils import login_required
@@ -9,7 +9,6 @@ from wikipedia import get_wiki_link
 from tmdb import get_movie_data
 from app import app, db
 
-CORS(app)
 
 login_manager = LoginManager()
 login_manager.login_view = "login"
