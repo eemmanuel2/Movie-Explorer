@@ -59,7 +59,7 @@ def login_post():
     user = User.query.filter_by(username=username).first()
     if user:
         login_user(user)
-        return flask.redirect(flask.url_for("index"))
+        return flask.redirect(flask.url_for("main"))
 
     else:
         return flask.jsonify({"status": 401, "reason": "Username or Password Error"})
@@ -84,13 +84,13 @@ def rate():
 
     db.session.add(new_rating)
     db.session.commit()
-    return flask.redirect("index")
+    return flask.redirect("main")
 
 
 @app.route("/")
 def landing():
     if current_user.is_authenticated:
-        return flask.redirect("index")
+        return flask.redirect("main")
     return flask.redirect("login")
 
 
@@ -100,9 +100,9 @@ def logout():
     return flask.redirect("login")
 
 
-@app.route("/index")
+@app.route("/main")
 @login_required
-def index():
+def main():
     movie_id = random.choice(MOVIE_IDS)
 
     # API calls
@@ -112,7 +112,7 @@ def index():
     ratings = Rating.query.filter_by(movie_id=movie_id).all()
 
     return flask.render_template(
-        "index.html",
+        "main.html",
         title=title,
         tagline=tagline,
         genre=genre,
@@ -158,16 +158,16 @@ def delete_rate():
     db.session.commit()
 
     return flask.render_template(
-        "index.html",
+        "main.html",
     )
 
 
 @bp.route("/commentsrates/")
 @login_required  # you don't necessarily need this login required line
 def getrates():
-    # NB: DO NOT add an "index.html" file in your normal templates folder
+    # NB: DO NOT add an "main.html" file in your normal templates folder
     # Flask will stop serving this React page correctly
-    return flask.render_template("index.html")
+    return flask.render_template("main.html")
 
     # comment = flask.request.json["comment"]
 
