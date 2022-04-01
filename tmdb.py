@@ -15,9 +15,7 @@ POSTER_SIZE = "w500"
 def get_movie_data(movie_id):
     response = requests.get(
         f"https://api.themoviedb.org/3/movie/{movie_id}",
-        params={
-            "api_key": os.getenv("TMDB_API_KEY"),
-        },
+        params={"api_key": os.getenv("TMDB_API_KEY")},
     )
     json_response = response.json()
     title = json_response["title"]
