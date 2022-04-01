@@ -140,35 +140,6 @@ def update_rate():
         )
     return flask.jsonify(comments_data)
 
-
-@app.route("/deleterates/", methods=["POST"])
-@login_required
-def delete_rate():
-    comments_ = Rating.query.filter_by(username=current_user.username).all()
-    comments_data = []
-    for comment in comments_:
-        comments_data.append(
-            {
-                "comment": comment.comment,
-                "rating": comment.rating,
-            }
-        )
-
-    db.session.delete(comment)
-    db.session.commit()
-
-    return flask.render_template(
-        "main.html",
-    )
-
-
-@bp.route("/commentsrates/")
-@login_required  # you don't necessarily need this login required line
-def getrates():
-    # NB: DO NOT add an "main.html" file in your normal templates folder
-    # Flask will stop serving this React page correctly
-    return flask.render_template("main.html")
-
     # comment = flask.request.json["comment"]
 
 
