@@ -106,7 +106,7 @@ def main():
     movie_id = random.choice(MOVIE_IDS)
 
     # API calls
-    (tagline, genre, poster_image) = get_movie_data(movie_id)
+    (title, tagline, genre, poster_image) = get_movie_data(movie_id)
     wikipedia_url = get_wiki_link(title)
 
     ratings = Rating.query.filter_by(movie_id=movie_id).all()

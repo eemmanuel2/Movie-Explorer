@@ -20,9 +20,11 @@ def get_movie_data(movie_id):
         },
     )
     json_response = response.json()
-    title = json_response["title"]
-    tagline = json_response["tagline"]
-    genres = ", ".join(genre["name"] for genre in json_response["genres"])
-    poster_path = json_response["poster_path"]
+    data = json_response
+
+    title = data["title"]
+    tagline = data["tagline"]
+    genres = ", ".join(genre["name"] for genre in data["genres"])
+    poster_path = data["poster_path"]
     poster_image = f"{IMAGE_BASE_URL}/{POSTER_SIZE}{poster_path}"
     return (title, tagline, genres, poster_image)
