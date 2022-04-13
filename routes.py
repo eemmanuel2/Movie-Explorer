@@ -1,6 +1,6 @@
 import random
 import os
-
+from flask_cors import CORS
 import flask
 from flask_login import login_user, current_user, LoginManager, logout_user
 from flask_login.utils import login_required
@@ -9,6 +9,7 @@ from wikipedia import get_wiki_link
 from tmdb import get_movie_data
 from app import app, db
 
+CORS(app)
 
 login_manager = LoginManager()
 login_manager.login_view = "login"
@@ -139,6 +140,72 @@ def update_rate():
             }
         )
     return flask.jsonify(comments_data)
+
+
+@app.route("/deleterates/", methods=["POST"])
+@login_required
+def delete_rate():
+    comments_ = Rating.query.filter_by(username=current_user.username).all()
+    comments_data = []
+    for comment in comments_:
+        comments_data.append(
+            {
+                "comment": comment.comment,
+                "rating": comment.rating,
+            }
+        )
+
+    db.session.delete(comment)
+    db.session.commit()
+
+    return flask.render_template(
+        "main.html",
+    )
+
+
+@app.route("/get_reviews")
+@login_required
+def foo():
+    ratings = Rating.query.filter_by(username=current_user.username).all()
+    return flask.jsonify(
+        [
+            {
+                "rating": rating.rating,
+                "comment": rating.comment,
+                "movie_id": rating.movie_id,
+            }
+            for rating in ratings
+        ]
+    )
+
+
+@app.route("/save_reviews", methods=["POST"])
+def save_reviews():
+    data = flask.request.json
+    user_ratings = Rating.query.filter_by(username=current_user.username).all()
+    new_ratings = [
+        Rating(
+            username=current_user.username,
+            rating=r["rating"],
+            comment=r["comment"],
+            movie_id=r["movie_id"],
+        )
+        for r in data
+    ]
+    for rating in user_ratings:
+        db.session.delete(rating)
+    for rating in new_ratings:
+        db.session.add(rating)
+    db.session.commit()
+    return flask.jsonify("Ratings successfully saved")
+
+
+@bp.route("/commentsrates/")
+@login_required  # you don't necessarily need this login required line
+def getrates():
+    # NB: DO NOT add an "index.html" file in your normal templates folder
+    # Flask will stop serving this React page correctly
+    return flask.render_template("index.html")
 
     # comment = flask.request.json["comment"]
 
