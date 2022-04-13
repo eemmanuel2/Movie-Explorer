@@ -1,19 +1,3 @@
-## Setup Instructions
-1. `pip3 install -r requirements.txt`
-2. Create a `.env` file in the top-level directory and enter the following as its contents:
-```
-export TMDB_API_KEY="<YOUR API KEY>"
-export DATABASE_URL="<YOUR POSTGRESQL DB URL>"
-```
-
-
-
-## To run the app
-1. run `npm run build`
-2. Run `python3 routes.py`
-
-
-
 # The Movie Explorer
 A simple web-app that displays a different movie (4 of my favorite movies to be exact) each time the page is refreshed along side it's wikipedia page. This app has an added feature where you will be able to sign up and register to rate the movie and give a comment of your own! A new added feature lets you edit/delete your comments/rate at any time. This will give you a much more flexible approach to the user experience 
 
@@ -30,7 +14,7 @@ The hardest part of this project was definetely this one. Javascript/react is so
 Thank You!
 
 
-Heroku URL : https://mighty-spire-29615.herokuapp.com/
+Heroku URL : "Work In progress"
 
 Please Enjoy :) !!
 
